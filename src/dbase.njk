@@ -1,0 +1,9 @@
+---
+permalink: 'api/v1.0/titles.json'
+---
+[
+    {% for post in collections.posts -%}
+        { "date": "{{ post.date.toDateString() }}", "title": "{{ post.data.title }}", "url": "{{ post.url }}" }
+        {%- if not loop.last -%},{% endif %}
+    {% endfor %}
+]

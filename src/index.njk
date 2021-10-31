@@ -1,0 +1,15 @@
+---
+title: "Latest topic(s)"
+layout: "base.njk"
+---
+
+<div style="min-height: 90%; width: 100%">
+    <ol>
+        {% for post in collections.posts | head(-5) | reverse %}
+            <li width="100%"> 
+                <span style="float: right;"> {{ post.date.toDateString() }} </span>
+                <a href="{{ post.url }}">{{ post.data.title }}</a>
+            </li>
+        {% endfor %}
+    </ol>
+</div>

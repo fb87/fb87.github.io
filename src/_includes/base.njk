@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="finder">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+        <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://latex.now.sh/style.css">
+
+        <script language="Javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+        <link rel="stylesheet" href="https://latex.now.sh/prism/prism.css">
+
+        <style>
+            body,
+            code,
+            input {
+                font-family: 'Xanh Mono', monospace !important;
+            }
+
+            body {
+              max-width: 150ch;
+            }
+        </style>
+    </head>
+
+    <body ng-controller="PostFinder">
+        {% include 'header.njk' %}
+        <header>
+            <h2>
+                {{ title }}...
+            </h2>
+        </header>
+
+        <main>
+            {{ content | safe }}
+        </main>
+
+        {% include 'footer.njk' %}
+
+
+        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+    </body>
+
+</html>

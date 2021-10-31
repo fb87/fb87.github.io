@@ -1,0 +1,15 @@
+<hr>
+<div width="100%" style="text-align: right;">
+    <small style="color: grey;">{{ site.footer }}</small>
+</div>
+
+<script language="Javascript">
+    var app = angular.module("finder", []);
+
+    app.controller("PostFinder", [ "$scope", "$http", function($scope, $http) {
+        $scope.all_titles = [];
+        $http.get('/api/v1.0/titles.json').then(function(response) {
+            $scope.all_titles = response.data;
+        });
+    }]);
+</script>

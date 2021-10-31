@@ -1,0 +1,33 @@
+---
+title: "Topic(s)"
+
+pagination:
+  data: collections.posts
+  size: 10
+
+layout: "base.njk"
+
+permalink: "posts/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+---
+
+<div style="min-height: 90%; width: 100%">
+    <ol>
+        {%- for post in pagination.items %}
+            <li width="100%"> 
+                <span style="float: right;"> {{ post.date.toDateString() }} </span>
+                <a style="text-decoration: none;" href="{{ post.url | url }}">{{ post.data.title }}</a>
+            </li>
+        {% endfor -%}
+    </ol>
+
+    <div>
+    Page:
+    {% for _ in pagination.pages %}
+        {% if page.url == pagination.hrefs[ loop.index0 ] %}
+            [{{ loop.index }}]
+        {% else %}
+            <a style="text-decoration: none;" href="{{ pagination.hrefs[ loop.index0 ] }}">{{ loop.index }}</a>
+        {% endif %}
+    {% endfor %}
+    </div>
+</div>

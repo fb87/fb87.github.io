@@ -1,0 +1,19 @@
+{
+  "name": "sign",
+  "version": "1.0.0",
+  "description": "11ty Blog Template",
+  "main": "index.js",
+  "scripts": {
+    "start": "rm -Rf dst/*; ./node_modules/.bin/eleventy --serve --port 9001",
+    "build": "rm -Rf dst/*; ./node_modules/.bin/eleventy "
+  },
+  "keywords": [
+    "blog",
+    "11ty"
+  ],
+  "author": "Si Dao",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1"
+  }
+}

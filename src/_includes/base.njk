@@ -5,33 +5,32 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        {% if title %}<title> {{ title }}... </title> {% endif %}
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
         <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
 
-        <script language="Javascript" src="{{ '/style/js/angular.min.js' | url }}"></script>
-
         <link rel="stylesheet" href="{{ '/style/css/latex.css' | url }}">
         <link rel="stylesheet" href="{{ '/style/css/prism.css' | url }}">
         <link rel="stylesheet" href="{{ '/style/css/index.css' | url }}">
+
+        <script language="Javascript" src="{{ '/style/js/angular.min.js' | url }}"></script>
     </head>
 
-    <body ng-controller="PostFinder">
+    <body>
         {% include 'header.njk' %}
-        <header>
-            <h2>
-                {{ title }}...
-            </h2>
-        </header>
 
-        <main>
-            {{ content | safe }}
-        </main>
+        {% if title %}
+        <header><h2> {{ title }}... </h2> </header>
+        {% endif %}
+
+        <main> {{ content | safe }} </main>
 
         {% include 'footer.njk' %}
 
-
-        <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+        <script language="Javascript" src="{{ '/style/js/prism.min.js' | url }}"></script>
+        <script language="Javascript" src="{{ '/style/js/index.min.js' | url }}"></script>
     </body>
 
 </html>

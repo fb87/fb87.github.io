@@ -1,18 +1,20 @@
-<h2> {{ site.title }} </h2>
-<small> {{ site.subtitle }} </small>
+<div ng-controller="PostFinder">
+    <h2> {{ site.title }} </h2>
+    <small> {{ site.subtitle }} </small>
 
-<div style="width: 100%; align-items:center; display: flex;">
-<a href="/">HOME</a> | <a href="/posts">ARCHIVE</a> | <a href="/about">ABOUT</a>
-<input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."/>
+    <div style="width: 100%; align-items:center; display: flex;">
+    <a href="/">HOME</a> | <a href="/posts">ARCHIVE</a> | <a href="/about">ABOUT</a>
+    <input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."/>
 
-</div>
-<hr>
-<div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0">
-    <h3> First 20 (max) topics found </h3>
-    <ol>
-        <li width="100%" class=".search-item" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20"> 
-            <span style="float: right;" ng-bind="post.date"></span>
-            <a style="text-decoration: none;" ng-href="{% raw %} {{post.url}} {% endraw %}" ng-bind="post.title"></a>
-        </li>
-    </ol>
+    </div>
+    <hr>
+    <div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0">
+        <h3> First 20 (max) topics found </h3>
+        <ol>
+            <li width="100%" class=".search-item" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20"> 
+                <span style="float: right;" ng-bind="post.date"></span>
+                <a style="text-decoration: none;" ng-href="{% raw %} {{post.url}} {% endraw %}" ng-bind="post.title"></a>
+            </li>
+        </ol>
+    </div>
 </div>

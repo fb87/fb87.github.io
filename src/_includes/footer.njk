@@ -1,15 +1,19 @@
 <hr>
+
+<div ng-controller="Discussion">
+    <a href="#" ng-click="find_comment('{{ page.url }}')">[ Show ]</a> <span ng-if="discussion"> or <a href="{% raw %}{{ discussion }}{% endraw %}')">[ Join ]</a> </span>discussions 
+    <ul>
+        <li ng-repeat="comment in comments">
+            {% raw %}
+            [<a href="{{ comment.user.html_url }}">{{ comment.user.login }}</a> - {{ comment.updated_at }}] <a href="{{ comment.html_url }}">{{ comment.body }}</a>
+            {% endraw %}
+        </li>
+    </ul>
+    <p ng-if="discussion">{% raw %}{{ comments.length }}{% endraw %} discussion(s) found</p>
+    <p ng-bind="warn_message"></p>
+</div>
+
+<hr>
 <div width="100%" style="text-align: right;">
     <small style="color: grey;">{{ site.footer }}</small>
 </div>
-
-<script language="Javascript">
-    var app = angular.module("finder", []);
-
-    app.controller("PostFinder", [ "$scope", "$http", function($scope, $http) {
-        $scope.all_titles = [];
-        $http.get('/api/v1.0/titles.json').then(function(response) {
-            $scope.all_titles = response.data;
-        });
-    }]);
-</script>

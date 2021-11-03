@@ -9,8 +9,8 @@
             {% endraw %}
         </li>
     </ul>
-    <p ng-bind="warn_message"></p><span ng-if="!no_discussion">
-    <a href="{% raw %}{{ discussion }}{% endraw %}')">[ Join ]</a> discussion</span>
+    <p ng-bind="warn_message"></p>
+    <span ng-if="channel"><a href="{% raw %}{{ channel }}{% endraw %}">[ Join ]</a> discussion</span>
 </div>
 
 <hr>

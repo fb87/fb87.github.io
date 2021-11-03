@@ -18,6 +18,8 @@ cat <<-EOF > src/posts/$year/$file
 date: $date
 title: "$title"
 layout: "base.njk"
+
+channel: $month
 ---
 
 $text

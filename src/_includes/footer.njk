@@ -1,7 +1,7 @@
 <hr>
 
 <div ng-controller="Discussion">
-    <a href="#" ng-click="find_comment('{{ page.url }}')">[ Show ]</a> <span ng-if="discussion"> or <a href="{% raw %}{{ discussion }}{% endraw %}')">[ Join ]</a> </span>discussions 
+    <a href="#" ng-click="find_comment({{ channel }})">[ Show ]</a> comments
     <ul>
         <li ng-repeat="comment in comments">
             {% raw %}
@@ -9,8 +9,8 @@
             {% endraw %}
         </li>
     </ul>
-    <p ng-if="discussion">{% raw %}{{ comments.length }}{% endraw %} discussion(s) found</p>
-    <p ng-bind="warn_message"></p>
+    <p ng-bind="warn_message"></p><span ng-if="!no_discussion">
+    <a href="{% raw %}{{ discussion }}{% endraw %}')">[ Join ]</a> discussion</span>
 </div>
 
 <hr>

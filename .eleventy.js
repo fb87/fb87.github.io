@@ -1,6 +1,21 @@
+const htmlmin = require("html-minifier");
+
 module.exports = function (eleventyConfig) {
-    eleventyConfig.addPassthroughCopy('./style', '/style');
-    eleventyConfig.addWatchTarget('./style', '/style');
+    eleventyConfig.addPassthroughCopy('src/style');
+    eleventyConfig.addWatchTarget('src/style');
+
+    eleventyConfig.addTransform("htmlmin", function (content, outputPath) {
+        if (outputPath && outputPath.endsWith(".html")) {
+            let minified = htmlmin.minify(content, {
+                useShortDoctype: true,
+                removeComments: true,
+                collapseWhitespace: true
+            });
+            return minified;
+        }
+
+        return content;
+    });
 
     eleventyConfig.addFilter("head", (array, n) => {
         if (!Array.isArray(array) || array.length === 0) {
@@ -21,7 +36,7 @@ module.exports = function (eleventyConfig) {
     return {
         dir: {
             input: "src",
-            output: "dst"
+            output: "docs"
         }
     };
 };

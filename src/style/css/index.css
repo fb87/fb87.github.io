@@ -1,0 +1,10 @@
+
+body,
+code,
+input {
+    font-family: 'Xanh Mono', monospace !important;
+}
+
+body {
+  max-width: 150ch;
+}

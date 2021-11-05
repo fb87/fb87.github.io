@@ -2,9 +2,13 @@
 body,
 code,
 input {
-    font-family: 'Xanh Mono', monospace !important;
+  font-family: 'Xanh Mono', monospace;
+}
+
+code {
+  font-family: 'Xanh Mono', monospace;
 }
 
 body {
-  max-width: 150ch;
+  max-width: 100ch;
 }

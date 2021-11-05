@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="finder">
+<html lang="en" ng-app="Blog">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% if title %}<title> {{ title }}... </title> {% endif %}
+        {% if title %}
+            <title> {{ title }}... </title>
+        {% endif %}
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
-        <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet"> 
 
         <link rel="stylesheet" href="{{ '/style/css/latex.css' | url }}">
         <link rel="stylesheet" href="{{ '/style/css/prism.css' | url }}">
@@ -22,10 +24,16 @@
         {% include 'header.njk' %}
 
         {% if title %}
-        <header><h2> {{ title }}... </h2> </header>
+            <header>
+                <h2>
+                    {{ title }}...
+                </h2>
+            </header>
         {% endif %}
 
-        <main> {{ content | safe }} </main>
+        <main>
+            {{ content | safe }}
+        </main>
 
         {% include 'footer.njk' %}
 

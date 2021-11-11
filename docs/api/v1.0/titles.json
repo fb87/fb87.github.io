@@ -1,27 +1,4 @@
 [
-    { "date": "Sun Jan 19 2020", "title": "=== ALL USERS PLEASE NOTE", "url": "/posts/2020/2020-01-19/" },
-    { "date": "Sun Feb 16 2020", "title": "There was an old Indian", "url": "/posts/2020/2020-02-16/" },
-    { "date": "Mon Mar 16 2020", "title": "In the middle of a", "url": "/posts/2020/2020-03-16/" },
-    { "date": "Thu Apr 30 2020", "title": "In the Old West a", "url": "/posts/2020/2020-04-30/" },
-    { "date": "Tue May 12 2020", "title": "pixel, n.: A mischievous, magical", "url": "/posts/2020/2020-05-12/" },
-    { "date": "Wed Jun 24 2020", "title": "I BET WHEN NEANDERTHAL KIDS", "url": "/posts/2020/2020-06-24/" },
-    { "date": "Fri Jul 31 2020", "title": "I don&#39;t need no arms", "url": "/posts/2020/2020-07-31/" },
-    { "date": "Wed Aug 19 2020", "title": "The basic publication series for", "url": "/posts/2020/2020-08-19/" },
-    { "date": "Fri Sep 25 2020", "title": "United Nations, New York, December", "url": "/posts/2020/2020-09-25/" },
-    { "date": "Sat Oct 24 2020", "title": "NATHAN ... your PARENTS were", "url": "/posts/2020/2020-10-24/" },
-    { "date": "Wed Nov 18 2020", "title": "The Seventh Edition licensing procedures", "url": "/posts/2020/2020-11-18/" },
-    { "date": "Thu Dec 31 2020", "title": "Linus, Alan - Please apply", "url": "/posts/2020/2020-12-31/" },
-    { "date": "Mon Jan 25 2021", "title": "Pig: An animal (Porcus omnivorous)", "url": "/posts/2021/2021-01-25/" },
-    { "date": "Mon Mar 01 2021", "title": "Ford had his own code", "url": "/posts/2021/2021-02-29/" },
-    { "date": "Thu Mar 11 2021", "title": "What you want, what you&#39;re", "url": "/posts/2021/2021-03-11/" },
-    { "date": "Thu Apr 01 2021", "title": "Alan Cox wrote: &gt;&gt; On", "url": "/posts/2021/2021-04-01/" },
-    { "date": "Fri May 28 2021", "title": "If the presence of electricity", "url": "/posts/2021/2021-05-28/" },
-    { "date": "Mon Jun 28 2021", "title": "A man is born gentle", "url": "/posts/2021/2021-06-28/" },
-    { "date": "Sat Jul 10 2021", "title": "Earth Tones: A youthful subgroup", "url": "/posts/2021/2021-07-10/" },
-    { "date": "Sat Aug 21 2021", "title": "Well, enough clowning around. Perl", "url": "/posts/2021/2021-08-21/" },
-    { "date": "Sun Sep 26 2021", "title": "This fortune cookie program is", "url": "/posts/2021/2021-09-26/" },
-    { "date": "Tue Oct 05 2021", "title": "Let me assure you that", "url": "/posts/2021/2021-10-05/" },
-    { "date": "Tue Nov 16 2021", "title": "You are old, said the", "url": "/posts/2021/2021-11-16/" },
-    { "date": "Thu Dec 02 2021", "title": "Q: How many lawyers does", "url": "/posts/2021/2021-12-02/" }
+    { "date": "Thu Nov 11 2021", "title": "NIX shell for buildstream development environment", "url": "/posts/nix-shell.buildstream/" }
     
 ]

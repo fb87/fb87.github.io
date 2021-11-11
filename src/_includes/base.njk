@@ -9,12 +9,13 @@
             <title> {{ title }}... </title>
         {% endif %}
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css">
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@0;1&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet"> 
 
         <link rel="stylesheet" href="{{ '/style/css/latex.css' | url }}">
-        <link rel="stylesheet" href="{{ '/style/css/prism.css' | url }}">
         <link rel="stylesheet" href="{{ '/style/css/index.css' | url }}">
 
         <script language="Javascript" src="{{ '/style/js/angular.min.js' | url }}"></script>
@@ -37,7 +38,8 @@
 
         {% include 'footer.njk' %}
 
-        <script language="Javascript" src="{{ '/style/js/prism.min.js' | url }}"></script>
+        <script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+        <script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script>
         <script language="Javascript" src="{{ '/style/js/index.min.js' | url }}"></script>
     </body>
 

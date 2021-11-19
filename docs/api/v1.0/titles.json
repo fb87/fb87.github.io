@@ -1,4 +1,6 @@
 [
-    { "date": "Thu Nov 11 2021", "title": "NIX shell for buildstream development environment", "url": "/posts/nix-shell.buildstream/" }
+    { "date": "Thu Nov 11 2021", "title": "NIX shell for buildstream development environment", "url": "/posts/nix-shell.buildstream/" },
+    { "date": "Thu Nov 18 2021", "title": "Linux Tips/Hints", "url": "/posts/linux-tips/" },
+    { "date": "Thu Nov 18 2021", "title": "Build and boot NIXOS for/on Pinephone", "url": "/posts/nixos-pinephone-devel/" }
     
 ]

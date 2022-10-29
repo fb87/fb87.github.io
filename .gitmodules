@@ -1,4 +1,0 @@
-[submodule "dst"]
-	path = dst
-	url = git@github.com:s1ng0c/s1ng0c.github.io.git
-	branch = gh-pages

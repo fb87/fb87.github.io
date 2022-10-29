@@ -1,7 +1,7 @@
 {
-  "name": "sign",
+  "name": "fb87 page",
   "version": "1.0.0",
-  "description": "11ty Blog Template",
+  "description": "fb87 personal page",
   "main": "index.js",
   "scripts": {
     "start": "rm -Rf docs/*; ./node_modules/.bin/eleventy --serve --port 9001",
@@ -14,7 +14,7 @@
   "author": "Si Dao",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1"
+    "@11ty/eleventy": "^1.0.2"
   },
   "dependencies": {
     "html-minifier": "^4.0.0"

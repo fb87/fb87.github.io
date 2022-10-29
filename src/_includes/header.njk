@@ -1,13 +1,13 @@
 <div ng-controller="ngPostFilterController">
     <h2> {{ site.title }} </h2>
-    <small> {{ site.subtitle }} </small>
+
+    <p><small> {{ site.subtitle }} </small></p>
 
     <div style="width: 100%; align-items:center; display: flex;">
-    <a style="padding-left: 5px; padding-right: 5px;" href="/">HOME</a> / 
-    <a style="padding-left: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> / 
-    <a style="padding-left: 5px; padding-right: 5px;" href="/about">ABOUT</a>
-    <input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."/>
-
+        <a style="padding-right: 5px; padding-right: 5px;" href="/">HOME</a> / 
+        <a style="padding-right: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> / 
+        <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a>
+        <input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."/>
     </div>
     <hr>
     <div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0">

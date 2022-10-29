@@ -9,5 +9,7 @@ code {
 }
 
 body {
-  max-width: 100ch;
+  /* max-width: 120ch; */
+  padding-left: 10%;
+  padding-right: 10%;
 }

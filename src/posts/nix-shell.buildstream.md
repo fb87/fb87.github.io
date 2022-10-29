@@ -1,6 +1,7 @@
 ---
 title: "NIX shell for buildstream development environment"
 layout: "base.njk"
+date: "2021-11-11"
 
 channel: 1
 ---

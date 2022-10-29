@@ -14,8 +14,8 @@ permalink: "posts/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumbe
     <ol>
         {%- for post in pagination.items %}
             <li width="100%"> 
-                <span style="float: right;"> {{ post.date.toDateString() }} </span>
-                <a style="text-decoration: none;" href="{{ post.url | url }}">{{ post.data.title }}</a>
+                <span style="float: right;"> {{ post.data.date }} </span>
+                <a style="text-decoration: none;" href="{{ post.url | url }}">[>]&nbsp;{{ post.data.title }}</a>
             </li>
         {% endfor -%}
     </ol>

@@ -1,0 +1,11 @@
+---
+permalink: 'api/v1.0/titles.vi.json'
+---
+[
+    {% for post in collections.posts -%}
+        {%- if post.data.lang=='VI' -%}
+        { "date": "{{ post.date.toISOString() }}", "title": "{{ post.data.title }}", "url": "{{ post.url }}" }
+        {%- if not loop.last -%},{% endif %}
+        {%- endif -%}
+    {% endfor %}
+]

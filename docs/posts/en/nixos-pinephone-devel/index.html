@@ -1,0 +1,96 @@
+<!doctype html><html lang="en" ng-app="Blog"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build and boot NIXOS for/on Pinephone...</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coy-without-shadows.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=BIZ+UDMincho&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"><link rel="stylesheet" href="/style/css/index.css"><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script></head><body><div ng-controller="ngPostFilterController"><h2>/DOC/(S)</h2><blockquote><p><small>[~] learn and share...</small></p></blockquote><div class="row" style="width: 100%; align-items:center; display: flex;"><div class="column column-80"><a style="padding-right: 5px; padding-right: 5px;" href="/">HOME</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a></div><div class="column"><div class="row"><input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."> <button ng-click="toogle_language()" ng-bind="is_en ? 'EN' : 'VI'"></button></div></div></div><hr><div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0"><h2>[>] First 20 (max) topics found</h2><ol><li ng-show="lang == post.lang" width="100%" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20"><span style="float: right;" ng-bind="post.date"></span> [~] <a style="text-decoration: none;" ng-href=" {{ post.url}} " ng-bind="post.title"></a></li></ol></div></div><header><h2>[:] Build and boot NIXOS for/on Pinephone...</h2></header><main><h3>Pre-require</h3><ul><li>A Linux with Nixpkgs Manager pre-installed</li></ul><h3>Build NixOS installer</h3><p>NixOS installer is bootstrap image which could be flashed to SDCard to boot and install NixOS on eMMC of Pinephone (PP). There is prebuilt image which could be found at <a href="https://hydra.nixos.org">Hydra</a> - NixOS official build farm. In this post we will try to build the same on local development machine.</p><pre><code class="language-bash">[user@local ~]$ git clone --depth=1 https://github.com/samueldr/cross-system
+[user@local ~]$ nix-build -A aarch64-linux.sdImage cross-system/default.nix
+
+# replace /dev/sdX with dedicated device
+[user@local ~]$ zstdcat result/sd-image/*.img.zst | dd of=/dev/sdX status=progress
+
+# write u-boot, replace /dev/sdX with dedicated device
+# to get u-boot-sunxi-with-spl.bin, either we could download prebuilt binary from
+# other distro (google :D) or download u-boot and build ourselve
+[user@local ~]$ dd if=u-boot-sunxi-with-spl.bin of=/dev/sdX bs=8k seek=1
+</code></pre><h3>Boot NixOS install and install to eMMC</h3><p>Boot the SDCard which contains installer image, get access to <strong>root</strong> user by typing <code>sudo -i</code>. To partitioning eMMC, get <a href="https://github.com/samueldr/holey"><strong>holey</strong></a> script. In the example below, we will create 3 partitions for <strong>efi boot</strong>, <strong>swap</strong> and <strong>root</strong>.</p><pre><code class="language-bash">[root@nixos ~]# nix-shell -p 'import (fetchTarball https://github.com/samueldr/holey/archive/master.tar.gz) {}'
+[nix-shell: ~]# holey /dev/mmcblk2 init
+[nix-shell: ~]# holey /dev/mmcblk2 add esp 1G
+[nix-shell: ~]# holey /dev/mmcblk2 add swap 2G
+[nix-shell: ~]# holey /dev/mmcblk2 add linux
+
+[nix-shell: ~]# mkfs.vfat -F32 /dev/mmcblk2p1
+[nix-shell: ~]# mkswap /dev/mmcblk2p2
+[nix-shell: ~]# swapon /dev/mmcblk2p2
+[nix-shell: ~]# mkfs.ext4 /dev/mmcblk2p3
+[nix-shell: ~]# exit
+</code></pre><p>Mount eMMC</p><pre><code class="language-bash">[root@nixos ~]# mount /dev/mmcblk3 /mnt &amp;&amp; mkdir /mnt/boot -p
+[root@nixos ~]# mount /dev/mmcblk1 /mnt/boot
+[root@nixos ~]# nixos-generate-config --root /mnt
+</code></pre><p>Edit configuration files by <strong>vi /mnt/etc/nixos/configuration.nix</strong>. Change <em>defaultGateway</em> to correct one, otherwise we will not able to connect to internet.</p><pre><code class="language-nix"># /etc/nixos/configuration.nix
+
+{ config, lib, pkgs, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  boot.loader.grub.enable = false;
+  boot.loader.generic-extlinux-compatible.enable = true;
+
+  networking = {
+    hostName = &quot;nixos-aarch64&quot;;
+    wireless.enable = false;
+
+    useDHCP = true;
+    interfaces.eth0 = {
+      useDHCP = true;
+      ipv4.addresses = [{
+	    address = &quot;192.168.1.200&quot;;
+	    prefixLength = 24;
+      }];
+    };
+
+    # run 'ip route show' to find correct gateway
+    defaultGateway = &quot;192.168.1.100&quot;;
+
+    # use opendns and cloudflare dns instead of google dns
+    nameservers = [ &quot;208.67.222.222&quot; &quot;1.1.1.1&quot; ];
+  };
+
+  time.timeZone = &quot;Asia/Ho_Chi_Minh&quot;;
+
+  i18n.defaultLocale = &quot;en_US.UTF-8&quot;;
+  console = {
+    font = &quot;Lat2-Terminus16&quot;;
+    keyMap = &quot;us&quot;;
+  };
+
+  users.users.nixos = {
+    isNormalUser = true;
+    extraGroups = [ &quot;wheel&quot; ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    vim wget htop wpa_supplicant
+
+    # enable wayland + weston
+    weston
+  ];
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  powerManagement.enable = true;
+  hardware.opengl.enable = true;
+
+  services.openssh.enable = true;
+
+  system.stateVersion = &quot;21.11&quot;;
+}
+</code></pre><p>Install NixOS to eMMC</p><pre><code class="language-nix">[root@nixos ~]# nixos-install --root /mnt
+
+# create password for **nixos** user
+[root@nixos ~]# nixos-enter --root /mnt
+[root@nixos ~]# passwd nixos
+
+[root@nixos ~]# exit &amp;&amp; sync &amp;&amp; poweroff
+</code></pre><p>Remove SDCard letting device boot from eMMC.</p></main><hr><div ng-controller="ngCommentController"><a href="#" ng-click="find_comment(5)">[ Show ]</a> comments<ul><li ng-repeat="comment in comments">[<a href="{{ comment.user.html_url }}">{{ comment.user.login }}</a> - {{ comment.updated_at }}] <a href="{{ comment.html_url }}">{{ comment.body }}</a></li></ul><p ng-bind="warn_message"></p><span ng-if="channel"><a href="{{ channel }}">[ Join ]</a> discussion</span></div><hr><div width="100%" style="text-align: right;"><small style="color: grey; font-style: italic;">(C)2022 - dao [dot] singoc [dot] com</small></div><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script><script language="Javascript" src="/style/js/index.min.js"></script></body></html>

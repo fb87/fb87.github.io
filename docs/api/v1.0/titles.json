@@ -1,7 +1,0 @@
-[
-    { "date": "2021-11-11T00:00:00.000Z", "title": "NIX shell for buildstream development environment", "url": "/posts/nix-shell.buildstream/" },
-    { "date": "2021-11-19T00:00:00.000Z", "title": "Linux Tips/Hints", "url": "/posts/linux-tips/" },
-    { "date": "2021-11-19T00:00:00.000Z", "title": "Build and boot NIXOS for/on Pinephone", "url": "/posts/nixos-pinephone-devel/" },
-    { "date": "2022-03-01T00:00:00.000Z", "title": "Host an Onion hidden service using Raspberry Pi", "url": "/posts/host-onion-hidden-service-on-rpi/" }
-    
-]

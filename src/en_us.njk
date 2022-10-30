@@ -1,9 +1,11 @@
 ---
-permalink: 'api/v1.0/titles.json'
+permalink: 'api/v1.0/titles.en.json'
 ---
 [
     {% for post in collections.posts -%}
+        {%- if post.data.lang=='EN' -%}
+        {%- if not loop.first -%},{% endif %}
         { "date": "{{ post.date.toISOString() }}", "title": "{{ post.data.title }}", "url": "{{ post.url }}" }
-        {%- if not loop.last -%},{% endif %}
+        {%- endif -%}
     {% endfor %}
 ]

@@ -2,6 +2,7 @@
 title: "Host an Onion hidden service using Raspberry Pi"
 layout: "base.njk"
 date: "2022-03-01"
+lang: "EN"
 
 channel: 6
 ---

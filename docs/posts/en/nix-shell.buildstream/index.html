@@ -1,0 +1,55 @@
+<!doctype html><html lang="en" ng-app="Blog"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NIX shell for buildstream development environment...</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coy-without-shadows.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=BIZ+UDMincho&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"><link rel="stylesheet" href="/style/css/index.css"><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script></head><body><div ng-controller="ngPostFilterController"><h2>/DOC/(S)</h2><blockquote><p><small>[~] learn and share...</small></p></blockquote><div class="row" style="width: 100%; align-items:center; display: flex;"><div class="column column-80"><a style="padding-right: 5px; padding-right: 5px;" href="/">HOME</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a></div><div class="column"><div class="row"><input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."> <button ng-click="toogle_language()" ng-bind="is_en ? 'EN' : 'VI'"></button></div></div></div><hr><div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0"><h2>[>] First 20 (max) topics found</h2><ol><li ng-show="lang == post.lang" width="100%" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20"><span style="float: right;" ng-bind="post.date"></span> [~] <a style="text-decoration: none;" ng-href=" {{ post.url}} " ng-bind="post.title"></a></li></ol></div></div><header><h2>[:] NIX shell for buildstream development environment...</h2></header><main><h3>Pre-require:</h3><ul><li>Get to know more about <strong>buildstream</strong>, check <a href="https://www.buildstream.build/">here</a></li><li>Get to know more about <strong>NIXOS</strong>, check <a href="https://nixos.org/manual/nixpkgs/stable/">here</a></li></ul><h3>Setup</h3><p><strong>buildstream</strong> requires <a href="https://python.org">Python</a> environment and <a href="https://github.com/containers/bubblewrap">Bubblewrap </a>to be installed. During the installation of <strong>buildstream</strong>, some depedencies are also installed. These pip modules will also pull some prebuilt binarries those might not work right away in NIXOS since they are not able to find glibc at <strong>/usr/lib</strong> as usual. The best way to overcome this sittuation is to use FHS User env. (<strong>autoPatchelfHook</strong> is also okay but not in today).</p><p>To make it easy, we will:</p><ul><li>Create FHS User env. with <strong>bubblewrap</strong>, <strong>gcc</strong>, <strong>fuse</strong>, etc.,</li><li>Before jumping to the shell, create Python virtual env. and:<ul><li>Install <strong>buildstream</strong> and <strong>buildstream external</strong></li><li>Patch <a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/python-modules/fusepy/default.nix"><strong>fusepy</strong></a> if any</li></ul></li></ul><p>Create <strong>shell.nix</strong> with content as below:</p><pre><code class="language-nix">{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+(pkgs.buildFHSUserEnv {
+    name = &quot;bst-fhsenv&quot;;
+    targetPkgs = pkgs: (with pkgs; [
+        gcc
+        glibc
+        fuse
+        bubblewrap
+
+        python39
+        python39Packages.pip
+        python39Packages.virtualenv
+    ]);
+
+    runScript = &quot;bash&quot;;
+
+    profile = ''
+        export PS1='[shell - \u@\h \w]\n&gt; '
+
+        if [ ! -d .venv ]; then
+            # create local environment
+            virtualenv .venv || exit -1
+        fi
+
+        source .venv/bin/activate || exit -1
+
+        if [ ! -f .venv/installed ]; then
+            # get rid of pip warning messages
+            pip install --upgrade pip
+
+            # install requires tools
+            pip install buildstream || exit -1
+
+            # install bst-external
+            git clone --depth=1 \
+                https://gitlab.com/BuildStream/bst-external.git \
+                /tmp/bst-external
+            (
+                cd /tmp/bst-external
+                pip install . || exit -1
+            )
+            rm -Rf /tmp/bst-external
+            
+            # W/A for libfuse not found issue
+            sed -i &quot;s|find_library('fuse')|'${pkgs.fuse}/lib/libfuse.so'|g&quot; \
+                .venv/${pkgs.python39.sitePackages}/buildstream/_fuse/fuse.py || exit -1
+
+            touch .venv/installed
+        fi
+    '';
+}).env
+</code></pre><p>To use</p><pre><code class="language-bash">[user@localhost ~/sample ]$ nix-shell
+(.venv) [shell - user@localhost ~/sample ]$ bst build sample.bst
+</code></pre></main><hr><div ng-controller="ngCommentController"><a href="#" ng-click="find_comment(1)">[ Show ]</a> comments<ul><li ng-repeat="comment in comments">[<a href="{{ comment.user.html_url }}">{{ comment.user.login }}</a> - {{ comment.updated_at }}] <a href="{{ comment.html_url }}">{{ comment.body }}</a></li></ul><p ng-bind="warn_message"></p><span ng-if="channel"><a href="{{ channel }}">[ Join ]</a> discussion</span></div><hr><div width="100%" style="text-align: right;"><small style="color: grey; font-style: italic;">(C)2022 - dao [dot] singoc [dot] com</small></div><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script><script language="Javascript" src="/style/js/index.min.js"></script></body></html>

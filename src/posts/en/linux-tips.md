@@ -2,6 +2,7 @@
 title: "Linux Tips/Hints"
 layout: "base.njk"
 date: "2021-11-19"
+lang: "EN"
 
 channel: 4
 ---

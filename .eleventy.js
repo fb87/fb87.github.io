@@ -3,6 +3,8 @@ const htmlmin = require("html-minifier");
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy('src/style');
     eleventyConfig.addWatchTarget('src/style');
+    eleventyConfig.addPassthroughCopy("CNAME");
+    eleventyConfig.addWatchTarget('CNAME');
 
     eleventyConfig.addTransform("htmlmin", function (content, outputPath) {
         if (outputPath && outputPath.endsWith(".html")) {

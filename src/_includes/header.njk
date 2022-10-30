@@ -12,15 +12,19 @@
             <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a>
         </div>
         <div class="column">
-            <input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens"
-                placeholder="Search..." />
+            <div class="row">
+                <input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens"
+                    placeholder="Search..." />
+                <button ng-click="toogle_language()" ng-bind="is_en ? 'EN' : 'VI'"></button>
+            </div>
         </div>
     </div>
     <hr>
     <div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0">
         <h2> [>] First 20 (max) topics found </h2>
         <ol>
-            <li width="100%" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20">
+            <li ng-show="lang == post.lang" width="100%"
+                ng-repeat="post in all_titles | filter:search_tokens | limitTo:20">
                 <span style="float: right;" ng-bind="post.date"></span>
                 [~] <a style="text-decoration: none;" ng-href="{% raw %} {{ post.url}} {% endraw %}"
                     ng-bind="post.title"></a>

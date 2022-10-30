@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="Blog">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% if title %}
-            <title> {{ title }}... </title>
-        {% endif %}
+    {% if title %}
+    <title> {{ title }}... </title>
+    {% endif %}
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coy-without-shadows.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Biz+UDMincho:wght@400;700&display=swap"> 
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coy-without-shadows.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Biz+UDMincho:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
 
-        <link rel="stylesheet" href="{{ '/style/css/index.css' | url }}">
+    <link rel="stylesheet" href="{{ '/style/css/index.css' | url }}">
 
-        <script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
-    </head>
+    <script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
 
-    <body>
-        {% include 'header.njk' %}
+<body>
+    {% include 'header.njk' %}
 
-        {% if title %}
-            <header>
-                <h2>
-                    [:] {{ title }}...
-                </h2>
-            </header>
-        {% endif %}
+    {% if title %}
+    <header>
+        <h2>
+            [:] {{ title }}...
+        </h2>
+    </header>
+    {% endif %}
 
-        <main>
-            {{ content | safe }}
-        </main>
+    <main>
+        {{ content | safe }}
+    </main>
 
-        {% include 'footer.njk' %}
+    {% include 'footer.njk' %}
 
-        <script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
-        <script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script>
-        <script language="Javascript" src="{{ '/style/js/index.min.js' | url }}"></script>
-    </body>
+    <script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script language="Javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script language="Javascript" src="{{ '/style/js/index.min.js' | url }}"></script>
+</body>
 
 </html>

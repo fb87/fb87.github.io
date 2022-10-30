@@ -1,21 +1,29 @@
 <div ng-controller="ngPostFilterController">
     <h2> {{ site.title }} </h2>
 
-    <p><small> {{ site.subtitle }} </small></p>
+    <blockquote>
+        <p><small> {{ site.subtitle }} </small></p>
+    </blockquote>
 
-    <div style="width: 100%; align-items:center; display: flex;">
-        <a style="padding-right: 5px; padding-right: 5px;" href="/">HOME</a> / 
-        <a style="padding-right: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> / 
-        <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a>
-        <input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."/>
+    <div class="row" style="width: 100%; align-items:center; display: flex;">
+        <div class="column column-80">
+            <a style="padding-right: 5px; padding-right: 5px;" href="/">HOME</a> /
+            <a style="padding-right: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> /
+            <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a>
+        </div>
+        <div class="column">
+            <input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens"
+                placeholder="Search..." />
+        </div>
     </div>
     <hr>
     <div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0">
-        <h3> First 20 (max) topics found </h3>
+        <h2> [>] First 20 (max) topics found </h2>
         <ol>
-            <li width="100%" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20"> 
+            <li width="100%" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20">
                 <span style="float: right;" ng-bind="post.date"></span>
-                <a style="text-decoration: none;" ng-href="{% raw %} {{ post.url}} {% endraw %}" ng-bind="post.title"></a>
+                [~] <a style="text-decoration: none;" ng-href="{% raw %} {{ post.url}} {% endraw %}"
+                    ng-bind="post.title"></a>
             </li>
         </ol>
     </div>

@@ -25,22 +25,18 @@ From my experience, our system comsumes about 80MiB RAM runtime, there is no nee
 
 * Mount second partition to e.g `/media/data`
 * Install `tor`, `nginx`
-
   ```bash
   ~# apk add nginx tor
   ```
-
 * Create `torrc` by copying `/etc/tor/torrc.sample`
   ```bash
   ~# cp /etc/tor/torrc.sample /etc/tor/torrc
   ```
-
 * Mount data partition
   ```bash
   ~# mkdir /media/data
   ~# mount /dev/mmcblk0p2 /media/data
   ```
-
 * Create mount point for our hidden service
   ```bash
   ~# mkdir /media/data/var/lib/tor/hidden_service
@@ -48,7 +44,6 @@ From my experience, our system comsumes about 80MiB RAM runtime, there is no nee
   ~# chmod -R 0700 /media/data/var
   ~# mkdir /media/data/htdocs
   ```
-
 * Enable hidden service on `torrc`
   * Before
     ```shell
@@ -80,7 +75,7 @@ From my experience, our system comsumes about 80MiB RAM runtime, there is no nee
     root /media/data/htdocs;
   }
   ```
-> Fill **your-onion-address** with content from `/media/data/var/lib/tor/hidden_service/hostname` 
+> Fill **your-onion-address** with content from `/media/data/var/lib/tor/hidden_service/hostname`
 
 * Create **/media/data/htdocs/index.html** with simple html content to test e.g `<h1>Welcome to my site</h1>`
 * Restart **nginx** `service nginx restart`
@@ -88,7 +83,6 @@ From my experience, our system comsumes about 80MiB RAM runtime, there is no nee
 Check if our web is up and running using [**Tor Browser**](https://www.torproject.org/download/) with address indecated by content of `/media/data/var/lib/tor/hidden_service/hostname`.
 
 * Save all the changes
-
   ```bash
   ~# lbu commit
   ```

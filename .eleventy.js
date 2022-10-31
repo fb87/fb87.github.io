@@ -3,6 +3,9 @@ const htmlmin = require("html-minifier");
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy('src/style');
     eleventyConfig.addWatchTarget('src/style');
+
+    // adding cutom domain to github page, this required as `docs` folder will be
+    // removed every built
     eleventyConfig.addPassthroughCopy("CNAME");
     eleventyConfig.addWatchTarget('CNAME');
 

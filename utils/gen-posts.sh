@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# script used to generate set of pages for testing
 
 rm -Rf src/posts/*
 
@@ -15,9 +17,11 @@ mkdir -p src/posts/$year
 
 cat <<-EOF > src/posts/$year/$file
 ---
-date: $date
 title: "$title"
 layout: "base.njk"
+
+date: $date
+lang: "EN"
 
 channel: $month
 ---

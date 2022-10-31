@@ -11,8 +11,7 @@ channel: 4
 
 * Reset tty: `printf "\033c"`
   * In case we wanna reset tty to default setting (e.g after changing by `htop`)  
-
-* Setting permission to all external disk/tty via u-dev
+  * Setting permission to all external disk/tty via u-dev
     ```bash
     # cat /etc/udev/rules.d/99-local.rules
     KERNEL=="ttyUSB[0-9]*", MODE="0666"

@@ -1,10 +1,15 @@
+html {
+  /* FIXME: align with miligram, default it set font size to 60+% */
+  font-size: 80%;
+}
+
 body,
 input {
-  font-family: 'Biz UDMincho', sans-serif;
+  font-family: 'Special Elite', sans-serif;
 }
 
 code {
-  font-family: 'Biz UDMincho', monospace !important;
+  font-family: 'Special Elite', monospace !important;
 }
 
 body {
@@ -12,3 +17,4 @@ body {
   padding-left: 10%;
   padding-right: 10%;
 }
+

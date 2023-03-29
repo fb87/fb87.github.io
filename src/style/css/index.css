@@ -5,11 +5,16 @@ html {
 
 body,
 input {
-  font-family: 'Special Elite', sans-serif;
+  font-family: 'BIZ UDMincho', sans-serif;
+  color: black
+}
+
+p {
+  text-align: justify;
 }
 
 code {
-  font-family: 'Special Elite', monospace !important;
+  font-family: 'BIZ UDMincho', monospace !important;
 }
 
 body {

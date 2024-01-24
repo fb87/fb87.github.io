@@ -1,8 +1,0 @@
-[
-    
-        { "date": "2021-11-11T00:00:00.000Z", "title": "NIX shell for buildstream development environment", "url": "/posts/en/nix-shell.buildstream/" },
-        { "date": "2021-11-19T00:00:00.000Z", "title": "Linux Tips/Hints", "url": "/posts/en/linux-tips/" },
-        { "date": "2021-11-19T00:00:00.000Z", "title": "Build and boot NIXOS for/on Pinephone", "url": "/posts/en/nixos-pinephone-devel/" },
-        { "date": "2022-03-01T00:00:00.000Z", "title": "Host an Onion hidden service using Raspberry Pi", "url": "/posts/en/host-onion-hidden-service-on-rpi/" },
-        { "date": "2023-05-05T00:00:00.000Z", "title": "NIX shell for Flutter Linux development", "url": "/posts/en/nix-shell.flutter.dev/" }
-]

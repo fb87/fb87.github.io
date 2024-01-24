@@ -1,1 +1,33 @@
-<!doctype html><html lang="en" ng-app="Blog"><head><meta charset="UTF-8"><meta name="description" content="My Personal Blog"><meta name="keywords" content="blog, shell, linux, dev, coding"><meta name="author" content="Si Dao"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Latest topic(s)...</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Glass+Antiqua&family=Wellfleet&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"><link rel="stylesheet" href="/style/css/index.css"><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script><link rel="stylesheet" href="https://unpkg.com/speedlify-score@1.0.2/speedlify-score.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/speedlify-score@1.0.2/speedlify-score.js" async defer="defer"></script></head><body><div ng-controller="ngPostFilterController"><h2>/DOC/(S)</h2><blockquote><p><small>[~] learn and share...</small></p></blockquote><div class="row" style="width: 100%; align-items:center; display: flex;"><div class="column column-80"><a style="padding-right: 5px; padding-right: 5px;" href="/">HOME</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a></div><div class="column"><div class="row"><input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."> <button ng-click="toogle_language()" ng-bind="is_en ? 'EN' : 'VI'"></button></div></div></div><hr><div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0"><h2>[>] First 20 (max) topics found</h2><ol><li ng-show="lang == post.lang" width="100%" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20"><span style="float: right;" ng-bind="post.date"></span> [~] <a style="text-decoration: none;" ng-href=" {{ post.url}} " ng-bind="post.title"></a></li></ol></div></div><header><h2>[:] Latest topic(s)...</h2></header><main><div style="min-height: 90%; width: 100%"><ol><li width="100%"><span style="float: right;">Fri May 05 2023 </span><a href="/posts/en/nix-shell.flutter.dev/">NIX shell for Flutter Linux development</a></li><li width="100%"><span style="float: right;">Sun Oct 30 2022 </span><a href="/posts/vi/tieng-tho/">Tieng Tho</a></li><li width="100%"><span style="float: right;">Tue Mar 01 2022 </span><a href="/posts/en/host-onion-hidden-service-on-rpi/">Host an Onion hidden service using Raspberry Pi</a></li><li width="100%"><span style="float: right;">Fri Nov 19 2021 </span><a href="/posts/en/nixos-pinephone-devel/">Build and boot NIXOS for/on Pinephone</a></li><li width="100%"><span style="float: right;">Fri Nov 19 2021 </span><a href="/posts/en/linux-tips/">Linux Tips/Hints</a></li></ol></div></main><hr><div width="100%" style="text-align: right;"><speedlify-score speedlify-url="https://www.11ty.dev/speedlify" hash="1bb9ec60" score weight rank rank-change></speedlify-score><small style="color: grey; font-style: italic;">(C)2022 - dao [dot] singoc [dot] com</small></div><script language="Javascript" src="/style/js/index.min.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<title>index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div id="HOME"><h1 id="HOME" class="header"><a href="#HOME">HOME</a></h1></div>
+
+<hr />
+
+<p>
+<a href="index.html">HOME</a> | <a href="posts/index.html">POSTS</a> | ------ | <a href="about.html">ABOUT</a>
+</p>
+
+<hr />
+
+<p>
+. </br>
+.. </br>
+</p>
+
+<hr />
+<p>
+By <a href="https://singoc.com">https://singoc.com</a>
+</p>
+
+</body>
+</html>

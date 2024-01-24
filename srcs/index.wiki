@@ -1,0 +1,14 @@
+= HOME =
+
+----
+
+[[index.wiki|HOME]] | [[posts/index.wiki|POSTS]] | ------ | [[about.wiki|ABOUT]]
+
+----
+
+. </br>
+.. </br>
+
+----
+By [[https://singoc.com]]
+

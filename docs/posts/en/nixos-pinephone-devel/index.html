@@ -1,96 +1,91 @@
-<!doctype html><html lang="en" ng-app="Blog"><head><meta charset="UTF-8"><meta name="description" content="My Personal Blog"><meta name="keywords" content="blog, shell, linux, dev, coding"><meta name="author" content="Si Dao"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build and boot NIXOS for/on Pinephone...</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-coy-without-shadows.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=BIZ+UDMincho&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"><link rel="stylesheet" href="/style/css/index.css"><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script><link rel="stylesheet" href="https://unpkg.com/speedlify-score@1.0.2/speedlify-score.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/speedlify-score@1.0.2/speedlify-score.js" async defer="defer"></script></head><body><div ng-controller="ngPostFilterController"><h2>/DOC/(S)</h2><blockquote><p><small>[~] learn and share...</small></p></blockquote><div class="row" style="width: 100%; align-items:center; display: flex;"><div class="column column-80"><a style="padding-right: 5px; padding-right: 5px;" href="/">HOME</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a></div><div class="column"><div class="row"><input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."> <button ng-click="toogle_language()" ng-bind="is_en ? 'EN' : 'VI'"></button></div></div></div><hr><div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0"><h2>[>] First 20 (max) topics found</h2><ol><li ng-show="lang == post.lang" width="100%" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20"><span style="float: right;" ng-bind="post.date"></span> [~] <a style="text-decoration: none;" ng-href=" {{ post.url}} " ng-bind="post.title"></a></li></ol></div></div><header><h2>[:] Build and boot NIXOS for/on Pinephone...</h2></header><main><h3>Pre-require</h3><ul><li>A Linux with Nixpkgs Manager pre-installed</li></ul><h3>Build NixOS installer</h3><p>NixOS installer is bootstrap image which could be flashed to SDCard to boot and install NixOS on eMMC of Pinephone (PP). There is prebuilt image which could be found at <a href="https://hydra.nixos.org">Hydra</a> - NixOS official build farm. In this post we will try to build the same on local development machine.</p><pre><code class="language-bash">[user@local ~]$ git clone --depth=1 https://github.com/samueldr/cross-system
-[user@local ~]$ nix-build -A aarch64-linux.sdImage cross-system/default.nix
+<!doctype html><html lang="en" ng-app="Blog"><head><meta charset="UTF-8"><meta name="description" content="My Personal Blog"><meta name="keywords" content="blog, shell, linux, dev, coding"><meta name="author" content="Si Dao"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build and boot NIXOS for/on Pinephone...</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Glass+Antiqua&family=Wellfleet&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"><link rel="stylesheet" href="/style/css/index.css"><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.js"></script><link rel="stylesheet" href="https://unpkg.com/speedlify-score@1.0.2/speedlify-score.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/speedlify-score@1.0.2/speedlify-score.js" async defer="defer"></script></head><body><div ng-controller="ngPostFilterController"><h2>/DOC/(S)</h2><blockquote><p><small>[~] learn and share...</small></p></blockquote><div class="row" style="width: 100%; align-items:center; display: flex;"><div class="column column-80"><a style="padding-right: 5px; padding-right: 5px;" href="/">HOME</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/posts">ARCHIVE</a> / <a style="padding-right: 5px; padding-right: 5px;" href="/about">ABOUT</a></div><div class="column"><div class="row"><input type="text" size="20" style="float: right; margin-left: auto;" ng-model="search_tokens" placeholder="Search..."> <button ng-click="toogle_language()" ng-bind="is_en ? 'EN' : 'VI'"></button></div></div></div><hr><div style="min-height: 90%; width: 100%" ng-show="search_tokens.length > 0"><h2>[>] First 20 (max) topics found</h2><ol><li ng-show="lang == post.lang" width="100%" ng-repeat="post in all_titles | filter:search_tokens | limitTo:20"><span style="float: right;" ng-bind="post.date"></span> [~] <a style="text-decoration: none;" ng-href=" {{ post.url}} " ng-bind="post.title"></a></li></ol></div></div><header><h2>[:] Build and boot NIXOS for/on Pinephone...</h2></header><main><h3>Pre-require</h3><ul><li>A Linux with Nixpkgs Manager pre-installed</li></ul><h3>Build NixOS installer</h3><p>NixOS installer is bootstrap image which could be flashed to SDCard to boot and install NixOS on eMMC of Pinephone (PP). There is prebuilt image which could be found at <a href="https://hydra.nixos.org">Hydra</a> - NixOS official build farm. In this post we will try to build the same on local development machine.</p><pre class="language-bash"><code class="language-bash"><span class="token punctuation">[</span>user@local ~<span class="token punctuation">]</span>$ <span class="token function">git</span> clone <span class="token parameter variable">--depth</span><span class="token operator">=</span><span class="token number">1</span> https://github.com/samueldr/cross-system
+<span class="token punctuation">[</span>user@local ~<span class="token punctuation">]</span>$ nix-build <span class="token parameter variable">-A</span> aarch64-linux.sdImage cross-system/default.nix
 
-# replace /dev/sdX with dedicated device
-[user@local ~]$ zstdcat result/sd-image/*.img.zst | dd of=/dev/sdX status=progress
+<span class="token comment"># replace /dev/sdX with dedicated device</span>
+<span class="token punctuation">[</span>user@local ~<span class="token punctuation">]</span>$ zstdcat result/sd-image/*.img.zst <span class="token operator">|</span> <span class="token function">dd</span> <span class="token assign-left variable">of</span><span class="token operator">=</span>/dev/sdX <span class="token assign-left variable">status</span><span class="token operator">=</span>progress
 
-# write u-boot, replace /dev/sdX with dedicated device
-# to get u-boot-sunxi-with-spl.bin, either we could download prebuilt binary from
-# other distro (google :D) or download u-boot and build ourselve
-[user@local ~]$ dd if=u-boot-sunxi-with-spl.bin of=/dev/sdX bs=8k seek=1
-</code></pre><h3>Boot NixOS install and install to eMMC</h3><p>Boot the SDCard which contains installer image, get access to <strong>root</strong> user by typing <code>sudo -i</code>. To partitioning eMMC, get <a href="https://github.com/samueldr/holey"><strong>holey</strong></a> script. In the example below, we will create 3 partitions for <strong>efi boot</strong>, <strong>swap</strong> and <strong>root</strong>.</p><pre><code class="language-bash">[root@nixos ~]# nix-shell -p 'import (fetchTarball https://github.com/samueldr/holey/archive/master.tar.gz) {}'
-[nix-shell: ~]# holey /dev/mmcblk2 init
-[nix-shell: ~]# holey /dev/mmcblk2 add esp 1G
-[nix-shell: ~]# holey /dev/mmcblk2 add swap 2G
-[nix-shell: ~]# holey /dev/mmcblk2 add linux
+<span class="token comment"># write u-boot, replace /dev/sdX with dedicated device</span>
+<span class="token comment"># to get u-boot-sunxi-with-spl.bin, either we could download prebuilt binary from</span>
+<span class="token comment"># other distro (google :D) or download u-boot and build ourselve</span>
+<span class="token punctuation">[</span>user@local ~<span class="token punctuation">]</span>$ <span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>u-boot-sunxi-with-spl.bin <span class="token assign-left variable">of</span><span class="token operator">=</span>/dev/sdX <span class="token assign-left variable">bs</span><span class="token operator">=</span>8k <span class="token assign-left variable">seek</span><span class="token operator">=</span><span class="token number">1</span></code></pre><h3>Boot NixOS install and install to eMMC</h3><p>Boot the SDCard which contains installer image, get access to <strong>root</strong> user by typing <code>sudo -i</code>. To partitioning eMMC, get <a href="https://github.com/samueldr/holey"><strong>holey</strong></a> script. In the example below, we will create 3 partitions for <strong>efi boot</strong>, <strong>swap</strong> and <strong>root</strong>.</p><pre class="language-bash"><code class="language-bash"><span class="token punctuation">[</span>root@nixos ~<span class="token punctuation">]</span><span class="token comment"># nix-shell -p 'import (fetchTarball https://github.com/samueldr/holey/archive/master.tar.gz) {}'</span>
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># holey /dev/mmcblk2 init</span>
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># holey /dev/mmcblk2 add esp 1G</span>
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># holey /dev/mmcblk2 add swap 2G</span>
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># holey /dev/mmcblk2 add linux</span>
 
-[nix-shell: ~]# mkfs.vfat -F32 /dev/mmcblk2p1
-[nix-shell: ~]# mkswap /dev/mmcblk2p2
-[nix-shell: ~]# swapon /dev/mmcblk2p2
-[nix-shell: ~]# mkfs.ext4 /dev/mmcblk2p3
-[nix-shell: ~]# exit
-</code></pre><p>Mount eMMC</p><pre><code class="language-bash">[root@nixos ~]# mount /dev/mmcblk3 /mnt &amp;&amp; mkdir /mnt/boot -p
-[root@nixos ~]# mount /dev/mmcblk1 /mnt/boot
-[root@nixos ~]# nixos-generate-config --root /mnt
-</code></pre><p>Edit configuration files by <strong>vi /mnt/etc/nixos/configuration.nix</strong>. Change <em>defaultGateway</em> to correct one, otherwise we will not able to connect to internet.</p><pre><code class="language-nix"># /etc/nixos/configuration.nix
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># mkfs.vfat -F32 /dev/mmcblk2p1</span>
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># mkswap /dev/mmcblk2p2</span>
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># swapon /dev/mmcblk2p2</span>
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># mkfs.ext4 /dev/mmcblk2p3</span>
+<span class="token punctuation">[</span>nix-shell: ~<span class="token punctuation">]</span><span class="token comment"># exit</span></code></pre><p>Mount eMMC</p><pre class="language-bash"><code class="language-bash"><span class="token punctuation">[</span>root@nixos ~<span class="token punctuation">]</span><span class="token comment"># mount /dev/mmcblk3 /mnt &amp;&amp; mkdir /mnt/boot -p</span>
+<span class="token punctuation">[</span>root@nixos ~<span class="token punctuation">]</span><span class="token comment"># mount /dev/mmcblk1 /mnt/boot</span>
+<span class="token punctuation">[</span>root@nixos ~<span class="token punctuation">]</span><span class="token comment"># nixos-generate-config --root /mnt</span></code></pre><p>Edit configuration files by <strong>vi /mnt/etc/nixos/configuration.nix</strong>. Change <em>defaultGateway</em> to correct one, otherwise we will not able to connect to internet.</p><pre class="language-nix"><code class="language-nix"><span class="token comment"># /etc/nixos/configuration.nix</span>
 
-{ config, lib, pkgs, ... }:
+<span class="token punctuation">{</span> config<span class="token punctuation">,</span> lib<span class="token punctuation">,</span> pkgs<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">}</span><span class="token punctuation">:</span>
 
-{
-  imports = [
-    ./hardware-configuration.nix
-  ];
+<span class="token punctuation">{</span>
+  imports <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token url">./hardware-configuration.nix</span>
+  <span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
+  boot<span class="token punctuation">.</span>loader<span class="token punctuation">.</span>grub<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  boot<span class="token punctuation">.</span>loader<span class="token punctuation">.</span>generic<span class="token operator">-</span>extlinux<span class="token operator">-</span>compatible<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 
-  networking = {
-    hostName = &quot;nixos-aarch64&quot;;
-    wireless.enable = false;
+  networking <span class="token operator">=</span> <span class="token punctuation">{</span>
+    hostName <span class="token operator">=</span> <span class="token string">"nixos-aarch64"</span><span class="token punctuation">;</span>
+    wireless<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 
-    useDHCP = true;
-    interfaces.eth0 = {
-      useDHCP = true;
-      ipv4.addresses = [{
-	    address = &quot;192.168.1.200&quot;;
-	    prefixLength = 24;
-      }];
-    };
+    useDHCP <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    interfaces<span class="token punctuation">.</span>eth0 <span class="token operator">=</span> <span class="token punctuation">{</span>
+      useDHCP <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      ipv4<span class="token punctuation">.</span>addresses <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+	    address <span class="token operator">=</span> <span class="token string">"192.168.1.200"</span><span class="token punctuation">;</span>
+	    prefixLength <span class="token operator">=</span> <span class="token number">24</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-    # run 'ip route show' to find correct gateway
-    defaultGateway = &quot;192.168.1.100&quot;;
+    <span class="token comment"># run 'ip route show' to find correct gateway</span>
+    defaultGateway <span class="token operator">=</span> <span class="token string">"192.168.1.100"</span><span class="token punctuation">;</span>
 
-    # use opendns and cloudflare dns instead of google dns
-    nameservers = [ &quot;208.67.222.222&quot; &quot;1.1.1.1&quot; ];
-  };
+    <span class="token comment"># use opendns and cloudflare dns instead of google dns</span>
+    nameservers <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">"208.67.222.222"</span> <span class="token string">"1.1.1.1"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-  time.timeZone = &quot;Asia/Ho_Chi_Minh&quot;;
+  time<span class="token punctuation">.</span>timeZone <span class="token operator">=</span> <span class="token string">"Asia/Ho_Chi_Minh"</span><span class="token punctuation">;</span>
 
-  i18n.defaultLocale = &quot;en_US.UTF-8&quot;;
-  console = {
-    font = &quot;Lat2-Terminus16&quot;;
-    keyMap = &quot;us&quot;;
-  };
+  i18n<span class="token punctuation">.</span>defaultLocale <span class="token operator">=</span> <span class="token string">"en_US.UTF-8"</span><span class="token punctuation">;</span>
+  console <span class="token operator">=</span> <span class="token punctuation">{</span>
+    font <span class="token operator">=</span> <span class="token string">"Lat2-Terminus16"</span><span class="token punctuation">;</span>
+    keyMap <span class="token operator">=</span> <span class="token string">"us"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-  users.users.nixos = {
-    isNormalUser = true;
-    extraGroups = [ &quot;wheel&quot; ];
-  };
+  users<span class="token punctuation">.</span>users<span class="token punctuation">.</span>nixos <span class="token operator">=</span> <span class="token punctuation">{</span>
+    isNormalUser <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    extraGroups <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">"wheel"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-  environment.systemPackages = with pkgs; [
+  environment<span class="token punctuation">.</span>systemPackages <span class="token operator">=</span> <span class="token keyword">with</span> pkgs<span class="token punctuation">;</span> <span class="token punctuation">[</span>
     vim wget htop wpa_supplicant
 
-    # enable wayland + weston
+    <span class="token comment"># enable wayland + weston</span>
     weston
-  ];
+  <span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  programs<span class="token punctuation">.</span>gnupg<span class="token punctuation">.</span>agent <span class="token operator">=</span> <span class="token punctuation">{</span>
+    enable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    enableSSHSupport <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-  powerManagement.enable = true;
-  hardware.opengl.enable = true;
+  powerManagement<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  hardware<span class="token punctuation">.</span>opengl<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 
-  services.openssh.enable = true;
+  services<span class="token punctuation">.</span>openssh<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 
-  system.stateVersion = &quot;21.11&quot;;
-}
-</code></pre><p>Install NixOS to eMMC</p><pre><code class="language-nix">[root@nixos ~]# nixos-install --root /mnt
+  system<span class="token punctuation">.</span>stateVersion <span class="token operator">=</span> <span class="token string">"21.11"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p>Install NixOS to eMMC</p><pre class="language-nix"><code class="language-nix"><span class="token punctuation">[</span>root<span class="token operator">@</span>nixos ~<span class="token punctuation">]</span><span class="token comment"># nixos-install --root /mnt</span>
 
-# create password for **nixos** user
-[root@nixos ~]# nixos-enter --root /mnt
-[root@nixos ~]# passwd nixos
+<span class="token comment"># create password for **nixos** user</span>
+<span class="token punctuation">[</span>root<span class="token operator">@</span>nixos ~<span class="token punctuation">]</span><span class="token comment"># nixos-enter --root /mnt</span>
+<span class="token punctuation">[</span>root<span class="token operator">@</span>nixos ~<span class="token punctuation">]</span><span class="token comment"># passwd nixos</span>
 
-[root@nixos ~]# exit &amp;&amp; sync &amp;&amp; poweroff
-</code></pre><p>Remove SDCard letting device boot from eMMC.</p></main><hr><div ng-controller="ngCommentController"><a href="#" ng-click="find_comment(5)">[ Show ]</a> comments<ul><li ng-repeat="comment in comments">[<a href="{{ comment.user.html_url }}">{{ comment.user.login }}</a> - {{ comment.updated_at }}] <a href="{{ comment.html_url }}">{{ comment.body }}</a></li></ul><p ng-bind="warn_message"></p><span ng-if="channel"><a href="{{ channel }}">[ Join ]</a> discussion</span></div><hr><div width="100%" style="text-align: right;"><speedlify-score speedlify-url="https://www.11ty.dev/speedlify" hash="1bb9ec60" score weight rank rank-change></speedlify-score><small style="color: grey; font-style: italic;">(C)2022 - dao [dot] singoc [dot] com</small></div><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script><script language="Javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script><script language="Javascript" src="/style/js/index.min.js"></script></body></html>
+<span class="token punctuation">[</span>root<span class="token operator">@</span>nixos ~<span class="token punctuation">]</span><span class="token comment"># exit &amp;&amp; sync &amp;&amp; poweroff</span></code></pre><p>Remove SDCard letting device boot from eMMC.</p></main><hr><div ng-controller="ngCommentController"><a href="javascript:" ng-click="find_comment(5)">[ Show ]</a> comments<ul><li ng-repeat="comment in comments">[<a href="{{ comment.user.html_url }}" target="_blank">{{ comment.user.login }}</a> - {{ comment.updated_at }}] <a href="{{ comment.html_url }}" target="_blank">{{ comment.body }}</a></li></ul><p ng-bind="warn_message"></p><span ng-if="channel"><a href="{{ channel }}" target="_blank">[ Join ]</a> discussion</span></div><hr><div width="100%" style="text-align: right;"><speedlify-score speedlify-url="https://www.11ty.dev/speedlify" hash="1bb9ec60" score weight rank rank-change></speedlify-score><small style="color: grey; font-style: italic;">(C)2022 - dao [dot] singoc [dot] com</small></div><script language="Javascript" src="/style/js/index.min.js"></script></body></html>

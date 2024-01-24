@@ -1,11 +1,12 @@
 html {
   /* FIXME: align with miligram, default it set font size to 60+% */
-  font-size: 80%;
+  font-size: 120%;
 }
 
 body,
 input {
-  font-family: 'BIZ UDMincho', sans-serif;
+  font-family: 'Glass Antiqua', cursive;
+  line-height: normal;
   color: black
 }
 
@@ -14,7 +15,7 @@ p {
 }
 
 code {
-  font-family: 'BIZ UDMincho', monospace !important;
+  font-family: 'Glass Antiqua', cursive;
 }
 
 body {

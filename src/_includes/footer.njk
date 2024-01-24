@@ -2,17 +2,17 @@
 
 <hr>
 <div ng-controller="ngCommentController">
-    <a href="#" ng-click="find_comment({{ channel }})">[ Show ]</a> comments
+    <a href="javascript:" ng-click="find_comment({{ channel }})">[ Show ]</a> comments
     <ul>
         <li ng-repeat="comment in comments">
             {% raw %}
-            [<a href="{{ comment.user.html_url }}">{{ comment.user.login }}</a> - {{ comment.updated_at }}] 
-            <a href="{{ comment.html_url }}">{{ comment.body }}</a>
+            [<a href="{{ comment.user.html_url }}" target="_blank">{{ comment.user.login }}</a> - {{ comment.updated_at }}] 
+            <a href="{{ comment.html_url }}" target="_blank">{{ comment.body }}</a>
             {% endraw %}
         </li>
     </ul>
     <p ng-bind="warn_message"></p>
-    <span ng-if="channel"><a href="{% raw %}{{ channel }}{% endraw %}">[ Join ]</a> discussion</span>
+    <span ng-if="channel"><a href="{% raw %}{{ channel }}{% endraw %}" target="_blank">[ Join ]</a> discussion</span>
 </div>
 
 {% endif %}

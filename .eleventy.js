@@ -1,8 +1,11 @@
 const htmlmin = require("html-minifier");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy('src/style');
     eleventyConfig.addWatchTarget('src/style');
+
+    eleventyConfig.addPlugin(syntaxHighlight);
 
     // adding cutom domain to github page, this required as `docs` folder will be
     // removed every built
@@ -26,6 +29,7 @@ module.exports = function (eleventyConfig) {
         if (!Array.isArray(array) || array.length === 0) {
             return [];
         }
+
         if (n < 0) {
             return array.slice(n);
         }

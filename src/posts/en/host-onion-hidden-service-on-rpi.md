@@ -66,7 +66,7 @@ From my experience, our system comsumes about 80MiB RAM runtime, there is no nee
 > Check `/media/data/var/lib/tor/hidden_service/hostname` to find host name of our hidden service, this info need to be filled into nginx configuration later on.
 
 * Create virtual server on **nginx** to bind to **tor** socket by edit `/etc/nginx/http.d/default`, replace it with content below:
-  ```bash
+  ```conf
   server {
     listen unix:/var/run/onion.sock;
     server_name <your-onion-address>.onion;

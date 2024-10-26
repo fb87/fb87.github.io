@@ -2,7 +2,7 @@
 
 ----
 
-## [A Markdown Viewer](2024/markdown-viewer.md)
+## [A Markdown Viewer](albert-einstein/markdown-viewer.md)
 
 [Sun Oct 20 12:57:18 AM +07 2024]
 
@@ -12,5 +12,5 @@ I have bunch of markdown documents, I just wanna public it over e.g github page,
 
 Means, I have to run **hugo** all the time whenever there is something updated? 
 
-[continue...](2024/markdown-viewer.md)
+[continue...](albert-einstein/markdown-viewer.md)
 

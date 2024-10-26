@@ -72,9 +72,6 @@
   const styles = [
     "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/atom-one-dark.min.css",
     "https://cdnjs.cloudflare.com/ajax/libs/asciinema-player/2.2.0/asciinema-player.min.css",
-    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css",
-
-    "https://fonts.cdnfonts.com/css/typewriter-condensed",
     "rhtml/style.min.css",
   ];
 
@@ -109,7 +106,7 @@
     document.body.appendChild(document.createElement("hr"));
 
     tag = document.createElement("span");
-    tag.innerHTML = "&copy;2024 ";
+    tag.innerHTML = `&copy;${new Date().getFullYear()}&nbsp;`;
     document.body.appendChild(tag);
 
     tag = document.createElement("a");

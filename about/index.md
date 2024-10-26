@@ -51,6 +51,6 @@ Software Engineer.
 | ------ | ------------------------------- |
 | Email  | dao@singoc.com                  |
 | Loc    | Ho Chi Minh, Vietnam            |
-| Github | [fb87](https://github.com)      |
+| Github | [fb87](https://github.com/fb87) |
 
 ----

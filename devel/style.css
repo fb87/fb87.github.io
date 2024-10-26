@@ -1,4 +1,6 @@
 /* vim: tabstop=2 softtabstop=2 shiftwidth=2 expandtab autoindent */
+@charset "UTF-8";
+
 @media (min-width: 576px) {
   body {
     max-width: 510px;
@@ -25,6 +27,11 @@
   }
 }
 
+@font-face {
+    font-family: "default-1";
+    src: url("fonts/default.ttf");
+}
+
 * {
   line-height: 1.5;
 }
@@ -32,46 +39,19 @@
 body {
   margin: 0 auto;
   padding: 20px;
-  font-family: Typewriter_Condensed;
+  font-family: 'default-1';
 }
 
-pre, code {
+code {
   background-color: #cdcdcd;
   padding-left: 5px;
   padding-right: 5px;
-  font-family: Typewriter_Condensed;
+  font-family: 'default-1';
 }
 
-li.done0::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: '\f0c8  '; /* [ ] */
-  font-size: 1.0em;
-}
-
-
-li.done1::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: "\f146  "; /* [.] */
-  font-size: 1.0em;
-}
-
-
-li.done2::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: "\f146  "; /* [-] */
-  font-size: 1.0em;
-}
-
-
-li.done3::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: "\f0fe  "; /* [+] */
-  font-size: 1.0em;
-}
-
-li.done4::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: "\f14a  "; /* [X] */
+li:marker {
+  font-family: 'default-1';
+  content: '\f531'; /* [ ] */
   font-size: 1.0em;
 }
 
@@ -79,4 +59,16 @@ img {
   max-width: 100%;
 }
 
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border: dashed 1px;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+}
 

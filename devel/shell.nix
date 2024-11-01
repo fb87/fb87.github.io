@@ -1,11 +1,31 @@
 { pkgs ? import <nixpkgs> {} }:
 
-pkgs.mkShell {
+let
+  base64_font = pkgs.runCommandNoCC "" { src = ./.; } ''
+    ${pkgs.coreutils}/bin/base64 -w 0 $src/fonts/default.ttf > $out
+  '';
+
+  index_html = pkgs.writeText "index.html" ''
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
+        <style>
+          @font-face { font-family: "default-1"; src: url(data:font/truetype;charset=utf-8;base64,${builtins.readFile base64_font}) format('truetype');} }
+	</style>
+        <style>${builtins.readFile ./style.css}</style>
+      </head>
+      <body> <script language="javascript">${builtins.readFile ./script.js}</script> </body>
+    </html>
+  '';
+
+in pkgs.mkShell {
   shellHook = ''
     function minifyAll() {
-      ${pkgs.minify}/bin/minify -o rhtml/style.min.css devel/style.css
-      ${pkgs.minify}/bin/minify -o rhtml/script.min.js devel/script.js
-      ${pkgs.minify}/bin/minify -o index.html          devel/index.htm
+      rm -f index.html && ${pkgs.minify}/bin/minify -o index.html ${index_html}
     }
 
     function preview() {

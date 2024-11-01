@@ -45,19 +45,39 @@
       let href = obj.href, text = obj.text;
       if (href.indexOf("://") > 0 || href.indexOf("//") === 0) {
         if (href.startsWith("cast:///")) {
+          console.log("cast", href);
           let file_uri = href.replace("cast:///", "");
+          console.log("file uri", file_uri);
           return `<div class="_the_asciinema_media" file_uri="${file_uri}"></div>`;
         }
+
+        if (href.startsWith("file:///")) {
+          console.log("file", href);
+          let file_uri = href.replace("file:///", "");
+          console.log("file uri", file_uri);
+          return `<a href="${window.location.origin}/${file_uri}" target="_blank">${text}</a>`;
+        }
+
         return `<a href="${href}" target="_blank">${text}</a>`;
       } else {
+        // specific link, don't touch
+        if (href.startsWith("mailto")) {
+          return `<a href="${href}">${text}</a>`;
+        }
+
         if (!href.startsWith("/")) href = `${basename()}/${href}`;
         href = href.replace("#", "");
-        return `<a href="#${href}?${Math.random()}">${text}</a>`;
+
+        if (!href.endsWith(".md") || href.endsWith("index.md")) {
+          return `<i class="fa-solid fa-folder"></i> <a href="#${href}?${Math.random()}">${text}</a>`;
+        } else {
+          return `<i class="fa-solid fa-file"></i> <a href="#${href}?${Math.random()}">${text}</a>`;
+        }
       }
     }
   };
   const _update_page = function () {
-    const new_page = location.hash ? location.hash: '/start';
+    const new_page = location.hash ? location.hash: '#/index.md';
     render_page(new_page.replace('#', ''));
   };
 
@@ -66,13 +86,13 @@
   const scripts = [
     "https://cdnjs.cloudflare.com/ajax/libs/marked/14.1.3/marked.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js",
-    "https://cdnjs.cloudflare.com/ajax/libs/asciinema-player/2.2.0/asciinema-player.min.js"
+    "https://cdn.jsdelivr.net/npm/asciinema-player@3.8.1/dist/bundle/asciinema-player.min.js"
   ];
 
   const styles = [
     "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/atom-one-dark.min.css",
-    "https://cdnjs.cloudflare.com/ajax/libs/asciinema-player/2.2.0/asciinema-player.min.css",
-    "rhtml/style.min.css",
+    "https://cdn.jsdelivr.net/npm/asciinema-player@3.8.1/dist/bundle/asciinema-player.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css",
   ];
 
   window.addEventListener("DOMContentLoaded", () => {
@@ -82,10 +102,25 @@
     tag.content = "width=device-width, initial-scale=1";
     document.head.appendChild(tag);
 
+    for(const script of scripts) {
+      const tag = document.createElement("script");
+      tag.src = script;
+      document.head.appendChild(tag);
+    }
+
+    for(const style of styles) {
+      const tag = document.createElement("link");
+      tag.rel="stylesheet"
+      tag.type="text/css"
+      tag.href = style;
+      tag.crossorigin="anonymous";
+      document.head.appendChild(tag);
+    }
+
     const links = [
-      { title: "HOME",  href: "#/start" },
-      { title: "POSTS", href: "#/posts" },
-      { title: "ABOUT", href: "#/about" },
+      { title: "HOME",  href: "#/index.md" },
+      { title: "ACTIVITIES",  href: "#/posts" },
+      { title: "ABOUT",  href: "#/about" },
     ];
 
     for (const link of links) {
@@ -106,27 +141,12 @@
     document.body.appendChild(document.createElement("hr"));
 
     tag = document.createElement("span");
-    tag.innerHTML = `&copy;${new Date().getFullYear()}&nbsp;`;
+    tag.innerHTML = "&copy;2024 ";
     document.body.appendChild(tag);
 
     tag = document.createElement("a");
     tag.href = `${window.location.origin}`;
-    tag.innerHTML = `${window.location.hostname}`;
+    tag.innerHTML = `${window.location.hostname.toUpperCase()}`;
     document.body.appendChild(tag);
-
-    for(const script of scripts) {
-      const tag = document.createElement("script");
-      tag.src = script;
-      document.body.appendChild(tag);
-    }
-
-    for(const style of styles) {
-      const tag = document.createElement("link");
-      tag.rel="stylesheet"
-      tag.type="text/css"
-      tag.href = style;
-      tag.crossorigin="anonymous";
-      document.body.appendChild(tag);
-    }
   });
 })();

@@ -27,55 +27,25 @@
 }
 
 * {
-  line-height: 1.5;
+  line-height: 1.2;
+  font-family: 'Junicode';
+  font-weight: normal !important;
 }
 
 body {
   margin: 0 auto;
   padding: 20px;
-  font-family: monospaced_font;
+}
+
+code, code > span, code > span > span {
+  font-family: "Lekton", monospace !important;
+  font-size: 0.85rem;
 }
 
 code {
   background-color: #cdcdcd;
-  padding-left: 5px;
-  padding-right: 5px;
   overflow-x: auto;
   white-space: pre-wrap;
-  font-family: monospaced_font;
-}
-
-li.done0::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: '\f0c8  '; /* [ ] */
-  font-size: 1.0em;
-}
-
-
-li.done1::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: "\f146  "; /* [.] */
-  font-size: 1.0em;
-}
-
-
-li.done2::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: "\f146  "; /* [-] */
-  font-size: 1.0em;
-}
-
-
-li.done3::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: "\f0fe  "; /* [+] */
-  font-size: 1.0em;
-}
-
-li.done4::marker {
-  font-family: 'Font Awesome 5 Free';
-  content: "\f14a  "; /* [X] */
-  font-size: 1.0em;
 }
 
 img {

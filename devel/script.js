@@ -90,7 +90,7 @@
   ];
 
   const styles = [
-    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/atom-one-dark.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/a11y-light.min.css",
     "https://cdn.jsdelivr.net/npm/asciinema-player@3.8.1/dist/bundle/asciinema-player.min.css",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css",
   ];
@@ -119,7 +119,7 @@
 
     const links = [
       { title: "HOME",  href: "#/index.md" },
-      { title: "ACTIVITIES",  href: "#/posts" },
+      { title: "POSTS",  href: "#/posts" },
       { title: "ABOUT",  href: "#/about" },
     ];
 
@@ -141,7 +141,7 @@
     document.body.appendChild(document.createElement("hr"));
 
     tag = document.createElement("span");
-    tag.innerHTML = "&copy;2024 ";
+    tag.innerHTML = "&copy;" + new Date().getFullYear() + " ";
     document.body.appendChild(tag);
 
     tag = document.createElement("a");
